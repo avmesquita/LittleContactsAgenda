@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LittleAgenda.Entity.Email>
+
+<h2><span aria-hidden="true" class="fa fa-envelope"> E-Mails</h2>
+
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Contact.Name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.EmailContent)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ContactType)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			LittleAgenda.Boilerplate.Mvc5
+			<td>
+				@Html.DisplayFor(modelItem => item.Contact.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EmailContent)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ContactType)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.EmailId }) |
+				@Html.ActionLink("Details", "Details", new { id = item.EmailId }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.EmailId })
+			</td>
+		</tr>
+	}
+
+</table>
+

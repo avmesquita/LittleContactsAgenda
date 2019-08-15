@@ -1,0 +1,118 @@
+﻿@model IEnumerable<LittleAgenda.Entity.Address>
+
+<h4>
+	<span aria-hidden="true" class="fa fa-users">
+		Addresses&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertAddress" style="font-size:10px;float:right;">
+			<span class="fa fa-plus"></span>
+		</button>
+</h4>
+
+@if (Model.Count() > 0)
+{
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Contact.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.AddressContent)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ContactType)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.ActionLink(" ", "Edit", new { id = item.AddressId, contactId = item.ContactId }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
+					@Html.ActionLink(" ", "Details", new { id = item.AddressId, contactId = item.ContactId }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })
+					@Html.ActionLink(" ", "Delete", new { id = item.AddressId, contactId = item.ContactId }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Contact.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AddressContent)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ContactType)
+				</td>
+			</tr>
+		}
+	</table>
+
+}
+else
+{
+
+	<p style="text-align:center;">
+		No Addresses found.
+	</p>
+
+}
+
+<div class="modal" id="insertAddress" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Insert New Address</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@{ Html.RenderAction("Create", "Addresses"); }
+			</div>
+			<div class="modal-footer">
+				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="editAddress" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Edit Address</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@{ Html.RenderAction("Edit", "Addresses"); }
+			</div>
+			<div class="modal-footer">
+				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="deleteAddress" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete Address</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@{ Html.RenderAction("Delete", "Addresses"); }
+			</div>
+			<div class="modal-footer">
+				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

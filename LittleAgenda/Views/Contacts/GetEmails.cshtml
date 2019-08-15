@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LittleAgenda.Entity.Email>
+
+<h4>
+	<span aria-hidden="true" class="fa fa-envelope">
+		E-Mails&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertEmail@Model.Contact.ContactId" style="font-size:10px;float:right;">
+			<span class="fa fa-plus"></span>
+		</button>
+</h4>
+
+@if (Model.Count() > 0)
+{
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Contact.Name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.EmailContent)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ContactType)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Contact.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EmailContent)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ContactType)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.EmailId, contactId = item.ContactId }) |
+				@Html.ActionLink("Details", "Details", new { id = item.EmailId, contactId = item.ContactId }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.EmailId, contactId = item.ContactId })
+			</td>
+		</tr>
+		@{ Html.Partial("InsertNewEmail",item.ContactId); }
+
+	}
+
+</table>
+
+}
+else
+{
+	<p style="text-align:center;">
+		No Emails found.
+	</p>
+}
+
+
+
+<div class="modal" id="editEmail" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Edit E-Mail Account</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@{ Html.RenderAction("Edit", "Emails"); }
+			</div>
+			<div class="modal-footer">
+				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="deleteEmail" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete E-Mail Account</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@{ Html.RenderAction("Delete", "Emails"); }
+			</div>
+			<div class="modal-footer">
+				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

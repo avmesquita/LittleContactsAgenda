@@ -1,0 +1,43 @@
+﻿@model LittleAgenda.Entity.Contact
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="card bg-info" style="width:400px;">
+	<div class="card-header text-center" style="height:50px;">
+		<h5 class="card-title" style="vertical-align:middle;">@Html.DisplayFor(model => model.Name)</h5>
+	</div>
+	<div class="card-body">
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">@Html.DisplayFor(model => model.Observation)</li>
+			<li class="list-group-item">@Html.DisplayFor(model => model.FavoriteTag)</li>
+		</ul>
+		<p class="card-text">
+			<div class="Addresses">
+				@{Html.Partial("GetAddresses", Model.Addresses); }
+			</div>
+		</p>
+
+		<p class="card-text">
+			<div class="Emails">
+				@{Html.Partial("GetEmails", Model.Emails); }
+			</div>
+		</p>
+		<p class="card-text">
+
+			<div class="Telephones">
+				@{Html.Partial("GetTelephones", Model.Telephones); }
+			</div>
+		</p>
+	</div>
+	<div class="card-footer">		
+		@Html.ActionLink("Edit", "Edit", new { id = Model.ContactId }) 
+		&nbsp;
+		@Html.ActionLink("Back to List", "Index")	
+	</div>
+</div>
+
