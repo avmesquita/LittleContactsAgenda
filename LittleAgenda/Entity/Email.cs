@@ -19,8 +19,7 @@ namespace LittleAgenda.Entity
 		[SQLiteNetExtensions.Attributes.ForeignKey(typeof(Contact))]
 		public string ContactId { get; set; }
 
-		[Display(Name = "E-Mail Account")]
-		[DataType(DataType.EmailAddress)]
+		[Display(Name = "E-Mail Account")]		
 		public string EmailContent { get; set; }
 
 		[Column("ContactType")]

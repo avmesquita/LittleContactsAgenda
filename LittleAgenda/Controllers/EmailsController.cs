@@ -41,7 +41,7 @@ namespace LittleAgenda.Controllers
         // GET: Emails/Create
         public ActionResult Create()
         {
-            ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name");
+            //ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name");
             return View();
         }
 

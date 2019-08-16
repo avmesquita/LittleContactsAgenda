@@ -395,6 +395,9 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Contacts\InsertNewEmail.cshtml" />
+    <Content Include="Views\EditEmail.cshtml" />
+    <Content Include="Views\Contacts\DeleteEmail.cshtml" />
+    <Content Include="Views\Shared\_DefaultBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.woff2" />

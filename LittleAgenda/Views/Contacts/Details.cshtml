@@ -4,40 +4,50 @@
 	ViewBag.Title = "Details";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
-<div class="card bg-info" style="width:400px;">
-	<div class="card-header text-center" style="height:50px;">
-		<h5 class="card-title" style="vertical-align:middle;">@Html.DisplayFor(model => model.Name)</h5>
+<br />
+<h2>Contact Details</h2>
+<br />
+<div class="card" style="">
+	<div class="card-header text-center bg-info" style="height:50px;color:white;">
+		<h5 class="card-title" style="vertical-align:middle;font-size:24px;text-align:left;">@Html.DisplayFor(model => model.Name)</h5>
 	</div>
 	<div class="card-body">
 		<ul class="list-group list-group-flush">
+			@if (Model.FavoriteTag)
+			{
+				<li class="list-group-item">
+					<span class="fa fa-star" alt="Favorite Contact" style="color:goldenrod;">&nbsp;Favorited</span>
+				</li>
+			}
 			<li class="list-group-item">@Html.DisplayFor(model => model.Observation)</li>
-			<li class="list-group-item">@Html.DisplayFor(model => model.FavoriteTag)</li>
 		</ul>
+		<br /><br />
+		<hr />
 		<p class="card-text">
 			<div class="Addresses">
-				@{Html.Partial("GetAddresses", Model.Addresses); }
+				@{Html.RenderAction("Index", "Addresses", Model.Addresses); }
 			</div>
 		</p>
-
+		<br /><br />
+		<hr />
 		<p class="card-text">
 			<div class="Emails">
-				@{Html.Partial("GetEmails", Model.Emails); }
+				@{Html.RenderAction("Index", "Emails", Model.Emails); }
 			</div>
 		</p>
+		<br /><br />
+		<hr />
 		<p class="card-text">
 
 			<div class="Telephones">
-				@{Html.Partial("GetTelephones", Model.Telephones); }
+				@{Html.RenderAction("Index", "Telephones", Model.Telephones); }
 			</div>
 		</p>
+		<br /><br />
 	</div>
-	<div class="card-footer">		
-		@Html.ActionLink("Edit", "Edit", new { id = Model.ContactId }) 
-		&nbsp;
-		@Html.ActionLink("Back to List", "Index")	
+	<div class="card-footer bg-info">		
+		@Html.ActionLink(" ", "Edit", new { id = Model.ContactId }, new { @class = "btn btn-warning btn-large fa fa-pencil", title = "Edit" })
 	</div>
 </div>
 
+@Html.Partial("_DefaultBack")

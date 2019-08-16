@@ -5,7 +5,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2><br />Contacts<br />&nbsp;</h2>
+<h2><br />Little Contacts Agenda<br />&nbsp;</h2>
 
 <p style="float:right;">
 
@@ -32,9 +32,17 @@
 				<p class="card-title font-weight-bold">@Html.DisplayNameFor(m => m.Observation)</p>
 				<p class="card-text">@Html.DisplayFor(modelItem => item.Observation)</p>
 
-				<p class="card-text">@Html.Partial("GetEmails", item.Emails)</p>
+				<h4>
+					<span aria-hidden="true" class="fa fa-envelope">
+						E-Mails&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertEmail@{@item.ContactId.ToString();}" style="font-size:10px;float:right;">
+							<span class="fa fa-plus"></span>
+						</button>
+				</h4>
+				<p class="card-text">@Html.Partial("GetEmails", item.Emails); </p>
 				<p class="card-text">@Html.Partial("GetTelephones", item.Telephones)</p>
 				<p class="card-text">@Html.Partial("GetAddresses", item.Addresses)</p>
+
+				@Html.Partial("InsertNewEmail", item.ContactId)
 			</div>
 			<div class="card-footer">
 				<p class="card-text" style="float:right;">
