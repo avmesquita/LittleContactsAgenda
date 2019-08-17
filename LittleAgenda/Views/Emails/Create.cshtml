@@ -22,53 +22,25 @@
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(model => model.ContactType, htmlAttributes: new { @class = "control-label col-md-12" })
-				<div class="col-md-12">
-					@Html.EnumDropDownListFor(model => model.ContactType, htmlAttributes: new { @class = "form-control" })
-					@Html.ValidationMessageFor(model => model.ContactType, "", new { @class = "text-danger" })
-				</div>
-			</div>
-
-			<div class="form-group">
 				<div class="col-md-offset-2 col-md-10">
 					<input type="submit" value="Create" class="btn btn-success" />
 					<br />
 					Novo<br />
-					<button type="button" id="btnCreateEmail" name="btnCreateEmail" onclick="javascript:CreateEmail();" class="btn btn-success">Create</button>
+					<button type="button" id="btnCreateEmail" name="btnCreateEmail" onclick="javascript:return CreateEmail();" class="btn btn-success">Create</button>
+					<br /><br />
+					@*
+						<a href="@Url.Action("Create","Emails", new {ContactId=Model.ContactId, EmailId=Model.EmailId, EmailContent=Model.EmailContent, ContactType=Model.ContactType })"
+						   class="btn btn-success">with action</a>
+					*@
+
 				</div>
 			</div>
 		</div>
 	}
 </div>
 
-<script>
-	$(document).ready(function () {
-	});
-	function CreateEmail() {
-		var data = {
-			EmailId: $('#EmailId').val(),
-			ContactId: $('#ContactId').val(),
-			EmailContent: $('#EmailContent').val(),
-			ContactType: $('#ContactType').val()
-		};
-		$.ajax({
-			url: '/Emails/Create/',
-			type: 'POST',
-			data: JSON.stringify(data),
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (d) {
-				console.log(d);
-				return true;
-			},
-			error: function (d) {
-				console.log(d);
-				return false;
-			}
-		});
-	}
-</script>
 
 @section Scripts {
+	@Scripts.Render("~/bundles/createEmail")
 	@Scripts.Render("~/bundles/jqueryval")
 }

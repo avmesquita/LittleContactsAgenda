@@ -17,6 +17,7 @@ namespace LittleAgenda.Entity
 		public string AddressId { get; set; }
 				
 		[SQLiteNetExtensions.Attributes.ForeignKey(typeof(Contact))]
+		[Display(Name = "Contact")]
 		public string ContactId { get; set; }
 
 		[Display(Name ="Address")]
@@ -24,17 +25,20 @@ namespace LittleAgenda.Entity
 
 		[Column("ContactType")]
 		[Display(Name = "Contact Type")]
-		public ContactType ContactType { get; set; }
-
+		public ContactType? ContactType { get; set; }
 
 		[System.ComponentModel.DataAnnotations.Schema.ForeignKey("ContactId")]
 		[ManyToOne]
 		public virtual Contact Contact { get; set; }
 
-
 		public Address()
 		{
 			this.AddressId = Guid.NewGuid().ToString();
+			this.ContactType = ContactType.GetValueOrDefault();
+			this.AddressContent = string.Empty;
+			this.ContactId = string.Empty;
+			this.Contact = new Contact() { ContactId = this.ContactId };
+
 		}
 
 	}

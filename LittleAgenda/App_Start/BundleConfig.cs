@@ -21,7 +21,7 @@
             // Note: We are using Google's CDN where possible and then Microsoft if not available for better
             //       performance (Google is more likely to have been cached by the users browser).
             // Note: that protocol (http:) is omitted from the CDN URL on purpose to allow the browser to choose the protocol.
-            bundles.UseCdn = true;
+            bundles.UseCdn = false;
 
             AddCss(bundles);
             AddJavaScript(bundles);
@@ -107,6 +107,11 @@
                 .Include("~/Scripts/Fallback/scripts.js")
                 .Include("~/Scripts/site.js");
             bundles.Add(failoverCoreBundle);
-        }
-    }
+
+			Bundle createEmailBundle = new ScriptBundle("~/bundles/createEmail")
+				.Include("~/Scripts/createEmail.js");
+			bundles.Add(createEmailBundle);
+
+		}
+	}
 }
