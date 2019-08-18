@@ -1,46 +1,42 @@
 ﻿@model IEnumerable<LittleAgenda.Entity.Email>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "";
+	Layout = "";
 }
 
-<h4>E-Mails</h4>
+<h4>
+	@{
+		string identifier = Model.FirstOrDefault().ContactId;
+	}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+	<span aria-hidden="true" class="fa fa-envelope">
+		E-Mails&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertEmail@{@identifier;}" style="font-size:10px;float:right;">
+			<span class="fa fa-plus"></span>
+		</button>
+</h4>
+
+@Html.Partial("InsertNewEmail", @identifier)
+
 <table class="table">
 	<tr>
 		<th></th>
 		<th>
-			@Html.DisplayNameFor(model => model.Contact.Name)
-		</th>
-		<th>
 			@Html.DisplayNameFor(model => model.EmailContent)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.ContactType)
 		</th>
 	</tr>
 
-@foreach (var item in Model) {
-	<tr>
-		<td>
-			@Html.ActionLink(" ", "Edit", new { id = item.EmailId }, new { @class = "btn btn-warning btn-large fa fa-pencil", title = "Edit" })
-			@Html.ActionLink(" ", "Details", new { id = item.EmailId }, new { @class = "btn btn-primary btn-large fa fa-list-alt", title = "Details" })
-			@Html.ActionLink(" ", "Delete", new { id = item.EmailId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Contact.Name)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.EmailContent)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.ContactType)
-		</td>
-	</tr>
-}
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.ActionLink(" ", "Edit", new { id = item.EmailId }, new { @class = "btn btn-warning btn-large fa fa-pencil", title = "Edit" })
+				@Html.ActionLink(" ", "Details", new { id = item.EmailId }, new { @class = "btn btn-primary btn-large fa fa-list-alt", title = "Details" })
+				@Html.ActionLink(" ", "Delete", new { id = item.EmailId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EmailContent)
+			</td>
+		</tr>
+	}
 
 </table>

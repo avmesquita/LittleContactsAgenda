@@ -51,6 +51,12 @@ namespace LittleAgenda.Controllers
             return View(data);
         }
 
+		public ActionResult InsertNewEmail(string contactId)
+		{
+			return RedirectToAction("InsertNewEmail", "Contacts", contactId);
+		}
+
+
 		// POST: Emails/Create
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -72,8 +78,9 @@ namespace LittleAgenda.Controllers
             return View(email);
         }
 
-        // GET: Emails/Edit/5
-        public async Task<ActionResult> Edit(string id)
+
+		// GET: Emails/Edit/5
+		public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -130,6 +137,8 @@ namespace LittleAgenda.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

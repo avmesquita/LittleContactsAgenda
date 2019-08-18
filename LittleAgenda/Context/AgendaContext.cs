@@ -16,16 +16,14 @@ namespace LittleAgenda.Context
 			ConnectionString = new SQLiteConnectionStringBuilder
 			{
 				DataSource = @"C:\Users\andre\Source\Repos\LittleAgenda\LittleAgenda\Database\LittleAgenda.db3",
-				ForeignKeys = true,
-				//BinaryGUID = false,
+				ForeignKeys = true,				
 				FailIfMissing=false,
 				Version=3				
 			}.ConnectionString
 		}, true)
 		{
 			Database.Log = Console.Write;
-			this.Configuration.LazyLoadingEnabled = false;
-			this.Configuration.ProxyCreationEnabled = false;
+			//this.Configuration.LazyLoadingEnabled = false;			
 		}
 
 		public AgendaContext(string path)
@@ -35,17 +33,16 @@ namespace LittleAgenda.Context
 				ConnectionString = new SQLiteConnectionStringBuilder
 				{
 					DataSource = path,
-					ForeignKeys = true,
-					//BinaryGUID = false,
+					ForeignKeys = true,					
 					FailIfMissing = false,
-					Version = 3					
+					Version = 3										
 				}.ConnectionString
 			}, true)
 		{
 
 			Database.Log = Console.Write;
-			this.Configuration.LazyLoadingEnabled = false;
-			this.Configuration.ProxyCreationEnabled = false;
+			//this.Configuration.LazyLoadingEnabled = false;
+			//this.Configuration.ProxyCreationEnabled = false;
 		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -58,7 +55,7 @@ namespace LittleAgenda.Context
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
 			Database.SetInitializer<AgendaContext>(null);
-
+			/*
 			try
 			{
 				Database.Connection.ConnectionString = @"Data Source=C:\Users\andre\Source\Repos\LittleAgenda\LittleAgenda\Database\LittleAgenda.db3;ForeignKeys=true;Version=3;FailIfMissing=False;Journal Mode=Off";
@@ -69,10 +66,7 @@ namespace LittleAgenda.Context
 			{
 				throw ex;
 			}
-
-			//Database.SetInitializer(new SQLiteContextInitializer<AgendaContext>(_dbPath,modelBuilder));
-
-			//Database.SetInitializer<AgendaContext>(null);
+			*/
 		}
 
 		public DbSet<Contact> Contatos { get; set; }

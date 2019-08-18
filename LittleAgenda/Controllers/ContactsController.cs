@@ -22,11 +22,16 @@ namespace LittleAgenda.Controllers
         {
 			try
 			{
-				return View(await db.Contatos
+				
+				var data = await db.Contatos
 					.Include(m => m.Addresses)
 					.Include(m => m.Telephones)
 					.Include(m => m.Emails)
-					.ToListAsync());
+					.ToListAsync();
+					
+				//var data2 = await db.Contatos.ToListAsync();
+
+				return View(data);
 			}
 			catch (Exception ex)
 			{
