@@ -38,29 +38,37 @@ namespace LittleAgenda.Controllers
             return View(email);
         }
 
-        // GET: Emails/Create
-        public ActionResult Create()
+		// GET: Emails/Create		
+		public ActionResult Create(string contactId)
         {
-            //ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name");
-            return View();
+			var data = new Email()
+			{
+				ContactId = contactId,
+				ContactType = ContactType.Default,
+				EmailId = string.Empty,
+				EmailContent = string.Empty
+			};
+            return View(data);
         }
 
-        // POST: Emails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Emails/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "EmailId,ContactId,EmailContent,ContactType")] Email email)
         {
             if (ModelState.IsValid)
             {
+				var contact = db.Contatos.Find(email.ContactId);
+				email.Contact = contact;
 				email.EmailId = Guid.NewGuid().ToString();
+
 				db.Emails.Add(email);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
-
-            ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", email.ContactId);
+            ViewBag.ContactId = email.ContactId;
             return View(email);
         }
 

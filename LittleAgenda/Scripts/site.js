@@ -71,3 +71,11 @@
     }());
 
 })(window.framework = window.framework || {}, window.jQuery, window, document);
+
+function validationsummary(validationhtml) {	
+	if (document.getElementById("errorreport") != null) {
+		$(".errorreport").html(validationhtml);
+		document.getElementById("errorreport").innerHTML = validationhtml;
+		return (validationhtml == "");		
+	} else return false;
+}

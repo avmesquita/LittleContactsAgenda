@@ -1,5 +1,9 @@
 ﻿$(document).ready(function () {
+	$('#btnCreateEmail').click(function () {
+		CreateEmail();
+	});
 });
+
 function CreateEmail() {
 	var data = {
 		EmailId: $('#EmailId').val(),
@@ -13,13 +17,14 @@ function CreateEmail() {
 		data: JSON.stringify(data),
 		dataType: 'JSON',
 		contentType: 'application/json',
-		success: function (d) {
-			console.log(d);
-			return true;
+		success: function (d) {			
+			return validationsummary(d);
 		},
 		error: function (d) {
-			console.log(d);
+			validationsummary(d.statusText);
+			console.log(d.statusText);
 			return false;
 		}
 	});
 }
+

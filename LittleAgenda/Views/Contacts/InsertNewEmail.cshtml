@@ -10,7 +10,9 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				@{ Html.RenderAction("Create", "Emails", new LittleAgenda.Entity.Email() { ContactId = Model, ContactType = 0, EmailContent = "" }); }
+				@{
+					Html.RenderAction("Create", "Emails", new { contactId = Model });
+				}
 			</div>
 			<div class="modal-footer">				
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
