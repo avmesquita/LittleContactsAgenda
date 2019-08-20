@@ -23,7 +23,7 @@
 	@foreach (var item in Model)
 	{
 		@Html.HiddenFor(modelItem => item.ContactId);
-	
+
 		<div class="card" style="max-width:800px;">
 			<div class="card-header" style="height:55px!important;">
 				<h4 class="card-title">
@@ -44,14 +44,20 @@
 			</div>
 			<div class="card-footer" style="height:55px!important;">
 				<p class="card-text" style="float:left;">
-					@Html.ActionLink(" ", "Delete", new { id = item.ContactId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
+					@*
+		             @Html.ActionLink(" ", "Delete", new { id = item.ContactId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
+					*@
+					<button type="button" class="btn btn-large btn-danger" data-toggle="modal" data-target="#deleteContact@{@item.ContactId;}" style="font-size:10px;float:right;">
+						<span class="fa fa-trash"></span>
+					</button>
 				</p>
 				<p class="card-text" style="float:right;">
 					@Html.ActionLink(" ", "Details", new { id = item.ContactId }, new { @class = "btn btn-primary btn-large fa fa-list-alt", title = "Details" })
 				</p>
 			</div>
 		</div>
-	
+		@Html.Partial("DeleteContact", item.ContactId.ToString())
+
 	}
 </div>
 

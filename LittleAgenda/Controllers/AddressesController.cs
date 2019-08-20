@@ -77,10 +77,9 @@ namespace LittleAgenda.Controllers
 				db.Enderecos.Add(address);
 
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", address.ContactId);
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
+			}            
             return View(address);
         }
 
@@ -95,8 +94,7 @@ namespace LittleAgenda.Controllers
             if (address == null)
             {
                 return HttpNotFound();
-            }
-            ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", address.ContactId);
+            }            
             return View(address);
         }
 
@@ -115,9 +113,10 @@ namespace LittleAgenda.Controllers
 				db.Entry(address).State = EntityState.Modified;
 
 				await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", address.ContactId);
+
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
+			}
+            ViewBag.ContactId = address.ContactId;
             return View(address);
         }
 
@@ -148,8 +147,9 @@ namespace LittleAgenda.Controllers
 
 			db.Enderecos.Remove(address);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+			
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
 
         protected override void Dispose(bool disposing)
         {

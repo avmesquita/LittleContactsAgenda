@@ -403,6 +403,7 @@
     <Content Include="Views\Contacts\InsertNewTelephone.cshtml" />
     <Content Include="Views\Contacts\InsertNewAddress.cshtml" />
     <Content Include="Views\Contacts\InsertNewContact.cshtml" />
+    <Content Include="Views\Contacts\DeleteContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
