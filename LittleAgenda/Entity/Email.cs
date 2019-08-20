@@ -12,7 +12,7 @@ namespace LittleAgenda.Entity
 	[Table("Email")]
 	public class Email
 	{
-		[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.None),SQLite.PrimaryKey]
 		[Display(Name = "Internal Code")]
 		public string EmailId { get; set; }
 
@@ -26,10 +26,9 @@ namespace LittleAgenda.Entity
 		[Column("ContactType")]
 		[Display(Name = "Contact Type")]
 		public ContactType? ContactType { get; set; }
-
-		[System.ComponentModel.DataAnnotations.Schema.ForeignKey("ContactId")]
+		
 		[ManyToOne]
-		[Display(Name = "Contact")]
+		[Display(Name = "Contact"), System.ComponentModel.DataAnnotations.Schema.ForeignKey("ContactId")]
 		public Contact Contact { get; set; }
 
 		public Email()
@@ -37,8 +36,7 @@ namespace LittleAgenda.Entity
 			this.EmailId = Guid.NewGuid().ToString();
 			this.EmailContent = string.Empty;
 			this.ContactType = ContactType.GetValueOrDefault();
-			this.ContactId = string.Empty;
-			this.Contact = new Contact() { ContactId = this.ContactId };
+			this.ContactId = string.Empty;			
 		}
 	}
 

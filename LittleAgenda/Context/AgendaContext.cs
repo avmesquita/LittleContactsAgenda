@@ -41,6 +41,7 @@ namespace LittleAgenda.Context
 		{
 
 			Database.Log = Console.Write;
+			Database.ExecuteSqlCommand("PRAGMA foreign_keys = ON");
 			//this.Configuration.LazyLoadingEnabled = false;
 			//this.Configuration.ProxyCreationEnabled = false;
 		}
@@ -55,6 +56,7 @@ namespace LittleAgenda.Context
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
 			Database.SetInitializer<AgendaContext>(null);
+
 			/*
 			try
 			{

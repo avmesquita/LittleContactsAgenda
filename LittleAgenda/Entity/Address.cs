@@ -12,7 +12,7 @@ namespace LittleAgenda.Entity
 	[Table("Address")]
 	public class Address
 	{
-		[Key,DatabaseGenerated(DatabaseGeneratedOption.None)]		
+		[Key,DatabaseGenerated(DatabaseGeneratedOption.None),SQLite.PrimaryKey]		
 		[Display(Name = "Internal Code")]
 		public string AddressId { get; set; }
 				
@@ -26,9 +26,8 @@ namespace LittleAgenda.Entity
 		[Column("ContactType")]
 		[Display(Name = "Contact Type")]
 		public ContactType? ContactType { get; set; }
-
-		[System.ComponentModel.DataAnnotations.Schema.ForeignKey("ContactId")]
-		[ManyToOne]
+		
+		[ManyToOne, System.ComponentModel.DataAnnotations.Schema.ForeignKey("ContactId")]
 		public virtual Contact Contact { get; set; }
 
 		public Address()
@@ -37,8 +36,6 @@ namespace LittleAgenda.Entity
 			this.ContactType = ContactType.GetValueOrDefault();
 			this.AddressContent = string.Empty;
 			this.ContactId = string.Empty;
-			this.Contact = new Contact() { ContactId = this.ContactId };
-
 		}
 
 	}

@@ -12,7 +12,7 @@ namespace LittleAgenda.Entity
 	[Table("Telephone")]
 	public class Telephone
 	{
-		[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.None),SQLite.PrimaryKey]
 		[Display(Name = "Internal Code")]
 		public string TelephoneId { get; set; }
 
@@ -37,9 +37,7 @@ namespace LittleAgenda.Entity
 			this.TelephoneId = Guid.NewGuid().ToString();
 			this.ContactType = ContactType.GetValueOrDefault();
 			this.TelephoneContent = string.Empty;
-			this.ContactId = string.Empty;
-			this.Contact = new Contact() { ContactId = this.ContactId };
-
+			this.ContactId = string.Empty;			
 		}
 	}
 }

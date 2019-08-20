@@ -13,6 +13,7 @@ namespace LittleAgenda.Entity
 	public class Contact
 	{
 		[Key]
+		[SQLite.PrimaryKey]
 		[Column("ContactId")]
 		[Display(Name="Internal Code")]
 		public string ContactId { get; set; } = Guid.NewGuid().ToString();
@@ -34,15 +35,15 @@ namespace LittleAgenda.Entity
 
 		[Display(Name = "Addresses")]
 		[OneToMany]
-		public virtual ICollection<Address> Addresses { get; set; }
+		public virtual List<Address> Addresses { get; set; }
 
 		[Display(Name = "Telephones")]
 		[OneToMany]
-		public virtual ICollection<Telephone> Telephones { get; set; }
+		public virtual List<Telephone> Telephones { get; set; }
 
 		[Display(Name = "Emails")]
 		[OneToMany]
-		public virtual ICollection<Email> Emails { get; set; }
+		public virtual List<Email> Emails { get; set; }
 
 		public Contact()
 		{
