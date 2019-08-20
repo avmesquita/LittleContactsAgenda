@@ -316,6 +316,7 @@
     <Compile Include="Constants\HomeController\HomeControllerAction.cs" />
     <Compile Include="Constants\HomeController\HomeControllerRoute.cs" />
     <Compile Include="Context\AgendaContext.cs" />
+    <Compile Include="Context\ApplicationContext.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\EmailsController.cs" />
@@ -401,6 +402,7 @@
     <Content Include="Views\Shared\_DefaultBack.cshtml" />
     <Content Include="Views\Contacts\InsertNewTelephone.cshtml" />
     <Content Include="Views\Contacts\InsertNewAddress.cshtml" />
+    <Content Include="Views\Contacts\InsertNewContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.woff2" />

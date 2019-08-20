@@ -11,14 +11,19 @@
 	@*
 			@Html.ActionLink("Export ALL Contacts", "ExportExcel", "Contact", new { @class = "btn btn-large btn-info", title = "Export" })
 		<br /><br />
+		@Html.ActionLink("Create a New Contact", "Create", "Contact", new { @class = "btn btn-primary btn-large btn-success" })<br />
 	*@
-	@Html.ActionLink("Create a New Contact", "Create", "Contact", new { @class = "btn btn-primary btn-large btn-success" })<br />
+	<button type="button" class="btn btn-large btn-dark" data-toggle="modal" data-target="#insertNewContact" style="font-size:14px;">
+		Create New Contact
+	</button>
+
 </p>
 
 <div class="card-deck">
 	@foreach (var item in Model)
 	{
 		@Html.HiddenFor(modelItem => item.ContactId);
+	
 		<div class="card" style="max-width:800px;">
 			<div class="card-header" style="height:55px!important;">
 				<h4 class="card-title">
@@ -46,5 +51,8 @@
 				</p>
 			</div>
 		</div>
+	
 	}
 </div>
+
+@Html.Partial("InsertNewContact", new LittleAgenda.Entity.Contact() { ContactId = Guid.NewGuid().ToString() })

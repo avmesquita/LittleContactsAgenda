@@ -40,15 +40,30 @@ namespace LittleAgenda.Controllers
 
         // GET: Telephones/Create
         public ActionResult Create()
-        {
-            ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name");
+        {            
             return View();
         }
 
-        // POST: Telephones/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		public ActionResult Create(string contactId)
+		{
+			if (contactId == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			var data = new Telephone()
+			{
+				ContactId = contactId,
+				ContactType = ContactType.Default,
+				TelephoneId = string.Empty,
+				TelephoneContent = string.Empty
+			};
+			return View(data);
+		}
+
+		// POST: Telephones/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "TelephoneId,ContactId,TelephoneContent,ContactType")] Telephone telephone)
         {

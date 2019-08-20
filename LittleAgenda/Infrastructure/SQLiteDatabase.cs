@@ -10,6 +10,9 @@ using LittleAgenda.Entity;
 
 namespace LittleAgenda.Infrastructure
 {
+	/// <summary>
+	/// Not used
+	/// </summary>
 	public class SQLiteDatabase
 	{
 		/// <summary>

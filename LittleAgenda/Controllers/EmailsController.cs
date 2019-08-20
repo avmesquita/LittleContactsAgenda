@@ -45,7 +45,6 @@ namespace LittleAgenda.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-
 			var data = new Email()
 			{
 				ContactId = contactId,
