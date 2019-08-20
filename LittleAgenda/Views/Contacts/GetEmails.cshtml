@@ -1,32 +1,23 @@
 ﻿@model IEnumerable<LittleAgenda.Entity.Email>
 
+<h5>
+	E-Mails
+</h5>
 @if (Model.Count() > 0)
 {
-<table class="table">
-	<tr>
-		<th></th>
-		<th>
-			@Html.DisplayNameFor(model => model.EmailContent)
-		</th>
-	</tr>
-	@foreach (var item in Model)
-	{
-	<tr>
-		<td>
-			@Html.ActionLink("Edit", "Edit", new { id = item.EmailId, contactId = item.ContactId }) |
-			@Html.ActionLink("Details", "Details", new { id = item.EmailId, contactId = item.ContactId }) |
-			@Html.ActionLink("Delete", "Delete", new { id = item.EmailId, contactId = item.ContactId })
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.EmailContent)
-		</td>
-	</tr>
-
-		@Html.Partial("EditEmail", item.ContactId)
-		@Html.Partial("DeleteEmail", item.ContactId)
-	}
-</table>
-
+	<table class="table">
+		<tr>
+			<th></th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.EmailContent)
+				</td>
+			</tr>
+		}
+	</table>
 }
 else
 {

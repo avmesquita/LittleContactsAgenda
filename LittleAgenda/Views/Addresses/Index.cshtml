@@ -1,46 +1,30 @@
 ﻿@model IEnumerable<LittleAgenda.Entity.Address>
-
 @{
-    ViewBag.Title = "Index";
-    Layout = "";
+	Layout = "";
 }
-
-<h4>Addresses</h4>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-	<tr>
-		<th></th>
-		<th>
-			@Html.DisplayNameFor(model => model.Contact.Name)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.AddressContent)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.ContactType)
-		</th>
-	</tr>
-
-@foreach (var item in Model) {
-    <tr>
-		<td>
-			@Html.ActionLink(" ", "Edit", new { id = item.AddressId }, new { @class = "btn btn-warning btn-large fa fa-pencil", title = "Edit" })
-			@Html.ActionLink(" ", "Details", new { id = item.AddressId }, new { @class = "btn btn-primary btn-large fa fa-list-alt", title = "Details" })
-			@Html.ActionLink(" ", "Delete", new { id = item.AddressId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
-		</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contact.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AddressContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactType)
-        </td>
-    </tr>
+@if (Model != null && Model.Count() > 0)
+{
+	<table class="table">
+		<tr>
+			<th></th>
+			<th></th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.ActionLink(" ", "Delete", new { ContactId = item.ContactId, id = item.AddressId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AddressContent)
+				</td>
+			</tr>
+		}
+	</table>
 }
-
-</table>
+else
+{
+	<p style="text-align:center;font-size:14px;">
+		No Addresses found.
+	</p>
+}

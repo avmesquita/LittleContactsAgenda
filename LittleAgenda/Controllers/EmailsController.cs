@@ -14,7 +14,7 @@ namespace LittleAgenda.Controllers
 {
     public class EmailsController : Controller
     {
-        private AgendaContext db = new AgendaContext();
+        private readonly AgendaContext db = new AgendaContext();
 
         // GET: Emails
         public async Task<ActionResult> Index()
@@ -41,6 +41,11 @@ namespace LittleAgenda.Controllers
 		// GET: Emails/Create		
 		public ActionResult Create(string contactId)
         {
+			if (contactId == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
 			var data = new Email()
 			{
 				ContactId = contactId,
@@ -53,6 +58,11 @@ namespace LittleAgenda.Controllers
 
 		public ActionResult InsertNewEmail(string contactId)
 		{
+			if (contactId == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
 			return RedirectToAction("InsertNewEmail", "Contacts", contactId);
 		}
 
@@ -71,8 +81,7 @@ namespace LittleAgenda.Controllers
 				email.EmailId = Guid.NewGuid().ToString();
 
 				db.Emails.Add(email);
-                await db.SaveChangesAsync();
-                //return RedirectToAction("Index");
+                await db.SaveChangesAsync();                
             }
             ViewBag.ContactId = email.ContactId;
             return View(email);
@@ -105,7 +114,11 @@ namespace LittleAgenda.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(email).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+
+				var contact = db.Contatos.Find(email.ContactId);
+				email.Contact = contact;
+
+				await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", email.ContactId);
@@ -132,10 +145,28 @@ namespace LittleAgenda.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            Email email = await db.Emails.FindAsync(id);
-            db.Emails.Remove(email);
-            await db.SaveChangesAsync();
+			try
+			{
+
+				Email email = await db.Emails.FindAsync(id);
+
+				/*
+				 TODO: HOUSTON, WE HAVE A PROBLEM HERE... MAYBE LATER 
+				 */
+
+				var contact = db.Contatos.Find(email.ContactId);
+				email.Contact = contact;
+				email.ContactId = contact.ContactId;
+
+				db.Emails.Remove(email);
+				await db.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
             return RedirectToAction("Index");
+
         }
 
 

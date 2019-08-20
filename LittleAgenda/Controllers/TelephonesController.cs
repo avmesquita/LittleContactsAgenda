@@ -14,7 +14,7 @@ namespace LittleAgenda.Controllers
 {
     public class TelephonesController : Controller
     {
-        private AgendaContext db = new AgendaContext();
+        private readonly AgendaContext db = new AgendaContext();
 
         // GET: Telephones
         public async Task<ActionResult> Index()
@@ -54,8 +54,11 @@ namespace LittleAgenda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Telefones.Add(telephone);
-                await db.SaveChangesAsync();
+				var contact = db.Contatos.Find(telephone.ContactId);
+				telephone.Contact = contact;
+				db.Telefones.Add(telephone);
+
+				await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -88,8 +91,12 @@ namespace LittleAgenda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(telephone).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+				var contact = db.Contatos.Find(telephone.ContactId);
+				telephone.Contact = contact;
+
+				db.Entry(telephone).State = EntityState.Modified;
+
+				await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", telephone.ContactId);
@@ -117,7 +124,11 @@ namespace LittleAgenda.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Telephone telephone = await db.Telefones.FindAsync(id);
-            db.Telefones.Remove(telephone);
+
+			var contact = db.Contatos.Find(telephone.ContactId);
+			telephone.Contact = contact;
+
+			db.Telefones.Remove(telephone);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

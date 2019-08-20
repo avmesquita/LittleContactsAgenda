@@ -8,9 +8,10 @@
 <h2><br />Little Contacts Agenda<br />&nbsp;</h2>
 
 <p style="float:right;">
-
-	@Html.ActionLink("Export ALL Contacts", "ExportExcel", "Contact", new { @class = "btn btn-large btn-info", title = "Export" })
-	<br /><br />
+	@*
+			@Html.ActionLink("Export ALL Contacts", "ExportExcel", "Contact", new { @class = "btn btn-large btn-info", title = "Export" })
+		<br /><br />
+	*@
 	@Html.ActionLink("Create a New Contact", "Create", "Contact", new { @class = "btn btn-primary btn-large btn-success" })<br />
 </p>
 
@@ -19,39 +20,29 @@
 	{
 		@Html.HiddenFor(modelItem => item.ContactId);
 		<div class="card" style="max-width:800px;">
-			<div class="card-header">
-				<h3 class="card-title">
+			<div class="card-header" style="height:55px!important;">
+				<h4 class="card-title">
 					@if (item.FavoriteTag)
 					{
 						<span class="fa fa-star" alt="Favorite Contact"></span>
 					}
 					@Html.DisplayFor(modelItem => item.Name)
-				</h3>
+				</h4>
 			</div>
 			<div class="card-body">
 				<p class="card-title font-weight-bold">@Html.DisplayNameFor(m => m.Observation)</p>
 				<p class="card-text">@Html.DisplayFor(modelItem => item.Observation)</p>
 
-				<h4>
-					<span aria-hidden="true" class="fa fa-envelope">
-						E-Mails&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertEmail@{@item.ContactId.ToString();}" style="font-size:10px;float:right;">
-							<span class="fa fa-plus"></span>
-						</button>
-				</h4>
-				<p class="card-text">@Html.Partial("GetEmails", item.Emails); </p>
+				<p class="card-text">@Html.Partial("GetEmails", item.Emails)</p>
 				<p class="card-text">@Html.Partial("GetTelephones", item.Telephones)</p>
 				<p class="card-text">@Html.Partial("GetAddresses", item.Addresses)</p>
-
-				@Html.Partial("InsertNewEmail", item.ContactId)
 			</div>
-			<div class="card-footer">
-				<p class="card-text" style="float:right;">
-					@Html.ActionLink(" ", "Export", new { id = item.ContactId }, new { @class = "btn btn-warning btn-large fa fa-file-excel-o", title = "Export XLS" })
-					@Html.ActionLink(" ", "Export", new { id = item.ContactId }, new { @class = "btn btn-warning btn-large fa fa-file", title = "Export TXT" })
-
-					@Html.ActionLink(" ", "Edit", new { id = item.ContactId }, new { @class = "btn btn-warning btn-large fa fa-pencil", title = "Edit" })
-					@Html.ActionLink(" ", "Details", new { id = item.ContactId }, new { @class = "btn btn-primary btn-large fa fa-list-alt", title = "Details" })
+			<div class="card-footer" style="height:55px!important;">
+				<p class="card-text" style="float:left;">
 					@Html.ActionLink(" ", "Delete", new { id = item.ContactId }, new { @class = "btn btn-large btn-danger fa fa-trash", title = "Delete" })
+				</p>
+				<p class="card-text" style="float:right;">
+					@Html.ActionLink(" ", "Details", new { id = item.ContactId }, new { @class = "btn btn-primary btn-large fa fa-list-alt", title = "Details" })
 				</p>
 			</div>
 		</div>

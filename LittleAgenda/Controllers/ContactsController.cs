@@ -15,21 +15,18 @@ namespace LittleAgenda.Controllers
 {
     public class ContactsController : Controller
     {
-        private AgendaContext db = new AgendaContext();
+        private readonly AgendaContext db = new AgendaContext();
 
         // GET: Contacts
         public async Task<ActionResult> Index()
         {
 			try
 			{
-				
 				var data = await db.Contatos
 					.Include(m => m.Addresses)
 					.Include(m => m.Telephones)
 					.Include(m => m.Emails)
 					.ToListAsync();
-					
-				//var data2 = await db.Contatos.ToListAsync();
 
 				return View(data);
 			}
@@ -46,7 +43,8 @@ namespace LittleAgenda.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = await db.Contatos.Include(m => m.Addresses)
+            Contact contact = await db.Contatos
+				    .Include(m => m.Addresses)
 					.Include(m => m.Telephones)
 					.Include(m => m.Emails)
 					.Where(m => m.ContactId == id)

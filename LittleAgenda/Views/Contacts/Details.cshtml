@@ -9,7 +9,7 @@
 <br />
 <div class="card" style="">
 	<div class="card-header text-center bg-info" style="height:50px;color:white;">
-		<h5 class="card-title" style="vertical-align:middle;font-size:24px;text-align:left;">@Html.DisplayFor(model => model.Name)</h5>
+		<h5 class="card-title" style="vertical-align:middle;font-size:24px;text-align:left;"><span style="color:yellow">Contact Name:</span>&nbsp;@Html.DisplayFor(model => model.Name)</h5>
 	</div>
 	<div class="card-body">
 		<ul class="list-group list-group-flush">
@@ -25,24 +25,44 @@
 		<hr />
 		<p class="card-text">
 			<div class="Addresses">
+				<h4 style="padding-bottom:10px;">
+					<span aria-hidden="true" class="fa fa-home">
+						Addresses&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertAddress@{@Model.ContactId;}" style="font-size:10px;float:right;">
+							<span class="fa fa-plus"></span>
+						</button>
+				</h4>
 				@{Html.RenderAction("Index", "Addresses", Model.Addresses); }
 			</div>
 		</p>
+		@Html.Partial("InsertNewAddress", Model.ContactId)		
 		<br /><br />
 		<hr />
 		<p class="card-text">
 			<div class="Emails">
+				<h4 style="padding-bottom:10px;">
+					<span aria-hidden="true" class="fa fa-envelope">
+						E-Mails&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertEmail@{@Model.ContactId;}" style="font-size:10px;float:right;">
+							<span class="fa fa-plus"></span>
+						</button>
+				</h4>
 				@{Html.RenderAction("Index", "Emails", Model.Emails); }
 			</div>
 		</p>
+		@Html.Partial("InsertNewEmail", Model.ContactId)
 		<br /><br />
 		<hr />
 		<p class="card-text">
-
+			<h4 style="padding-bottom:10px;">
+				<span aria-hidden="true" class="fa fa-phone">
+					Telephones&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertTelephone@{@Model.ContactId;}" style="font-size:10px;float:right;">
+						<span class="fa fa-plus"></span>
+					</button>
+			</h4>
 			<div class="Telephones">
 				@{Html.RenderAction("Index", "Telephones", Model.Telephones); }
 			</div>
 		</p>
+		@Html.Partial("InsertNewTelephone", Model.ContactId)
 		<br /><br />
 	</div>
 	<div class="card-footer bg-info">		

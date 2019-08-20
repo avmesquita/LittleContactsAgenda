@@ -1,116 +1,29 @@
 ﻿@model IEnumerable<LittleAgenda.Entity.Telephone>
 
-<h4><span aria-hidden="true" class="fa fa-phone">
-	Telephones&nbsp;&nbsp; <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#insertTelephone" style="font-size:10px;float:right;">
-	   <span class="fa fa-plus"></span>
-	</button>
+<h4>
+	Telephones
 </h4>
 
 @if (Model.Count() > 0)
 {
 	<table class="table">
 		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.Contact.Name)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.TelephoneContent)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ContactType)
-			</th>
 			<th></th>
 		</tr>
-
 		@foreach (var item in Model)
 		{
 			<tr>
 				<td>
-					@Html.DisplayFor(modelItem => item.Contact.Name)
-				</td>
-				<td>
 					@Html.DisplayFor(modelItem => item.TelephoneContent)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ContactType)
-				</td>
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { id = item.TelephoneId }) |
-					@Html.ActionLink("Details", "Details", new { id = item.TelephoneId }) |
-					@Html.ActionLink("Delete", "Delete", new { id = item.TelephoneId })
 				</td>
 			</tr>
 		}
-
 	</table>
 }
 else
 {
-
 	<p style="text-align:center;">
 		No Telephones found.
 	</p>
 
 }
-
-@*
-<div class="modal" id="insertTelephone" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Insert New Telephone</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				@{ Html.RenderAction("Create", "Telephones"); }
-			</div>
-			<div class="modal-footer">
-				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal" id="editTelephone" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Edit Telephone</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				@{ Html.RenderAction("Edit", "Telephones"); }
-			</div>
-			<div class="modal-footer">
-				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal" id="deleteTelephone" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Delete Telefone</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				@{ Html.RenderAction("Delete", "Telephones"); }
-			</div>
-			<div class="modal-footer">
-				<!--<button type="button" class="btn btn-primary">Save changes</button>-->
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-*@

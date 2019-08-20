@@ -1,9 +1,9 @@
 ﻿@{
     ViewBag.Title = "About";
-    ViewBag.Description = "The ASP.NET MVC Boilerplate about page.";
-    ViewBag.Author = "Muhammad Rehan Saeed";
+    ViewBag.Description = "Little Contacts Agenda about page.";
+    ViewBag.Author = "Andre Veloso de Mesquita";
     ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@RehanSaeedUK");
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@avmesquita");
     ViewBag.OpenGraph = new OpenGraphBusiness(
         ViewBag.Title,
         new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 },
@@ -16,7 +16,7 @@
         new OpenGraphLocation(51.5286417, -0.1015987))
     {
         Determiner = OpenGraphDeterminer.Blank,
-        SiteName = Application.Name
+        SiteName = "Little Contacts Agenda"
     };
 }
 
