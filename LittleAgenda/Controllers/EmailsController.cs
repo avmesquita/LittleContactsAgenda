@@ -81,6 +81,8 @@ namespace LittleAgenda.Controllers
 
 				db.Emails.Add(email);
 				await db.SaveChangesAsync();
+
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
 			}
 			ViewBag.ContactId = email.ContactId;
 			return View(email);
@@ -99,7 +101,7 @@ namespace LittleAgenda.Controllers
 			{
 				return HttpNotFound();
 			}
-			ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", email.ContactId);
+			ViewBag.ContactId = email.ContactId;
 			return View(email);
 		}
 
@@ -118,7 +120,8 @@ namespace LittleAgenda.Controllers
 				email.Contact = contact;
 
 				await db.SaveChangesAsync();
-				return RedirectToAction("Index");
+
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
 			}
 			ViewBag.ContactId = new SelectList(db.Contatos, "ContactId", "Name", email.ContactId);
 			return View(email);
@@ -144,16 +147,23 @@ namespace LittleAgenda.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> DeleteConfirmed(string id)
 		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
 			Contact contact = null;
 			Email email = await db.Emails.SingleAsync(m => m.EmailId == id);
-
+			if (email == null)
+			{
+				return HttpNotFound();
+			}
 			contact = db.Contatos.Single(m => m.ContactId == email.ContactId);
 			email.Contact = contact;
 
 			db.Emails.Remove(email);
 			await db.SaveChangesAsync();
 
-			return RedirectToAction("Details", "Contacts", contact.ContactId);
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
 

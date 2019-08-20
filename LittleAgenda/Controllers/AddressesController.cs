@@ -140,7 +140,15 @@ namespace LittleAgenda.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            Address address = await db.Enderecos.FindAsync(id);
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			Address address = await db.Enderecos.FindAsync(id);
+			if (address == null)
+			{
+				return HttpNotFound();
+			}
 
 			var contact = db.Contatos.Find(address.ContactId);
 			address.Contact = contact;
